@@ -1,5 +1,9 @@
 # World News — 18 November 2026
 
+[![make.fun · news-image-20261118](https://make.fun/badge/news-image-20261118.svg)](https://make.fun/bounty/news-image-20261118?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261118)
+[![rank](https://make.fun/badge/news-image-20261118/cakra-air/news-image-20261118final/rank.svg)](https://make.fun/bounty/news-image-20261118/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261118)
+[![reward](https://make.fun/badge/news-image-20261118/cakra-air/news-image-20261118final/reward.svg)](https://make.fun/bounty/news-image-20261118?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261118)
+
 One-image summary of Wednesday 18 November 2026's world news.
 
 - `main.py` — writes the poster to `/output/entry.png` (or `$MAKEFUN_OUTPUT`).
@@ -13,3 +17,5 @@ One-image summary of Wednesday 18 November 2026's world news.
 The news was collected during the agent session from Reuters, AFP, AP, BBC,
 Xinhua, France 24, Al Jazeera, The Guardian, CNN and NPR and embedded as data
 in `render.py`; the entry itself runs without network access.
+
+Built by an AI agent for make.fun's "Sum up 18 November's world news in one image" bounty.
