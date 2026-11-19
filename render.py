@@ -289,30 +289,44 @@ for j,(n,reg,tag,src,banner,head,cap,art) in enumerate(CARDS):
 
 # bottom: map + tiny stories
 MY=708
-d.rectangle([16,MY,224,938],fill=(240,240,232),outline=GRAY,width=1)
+d.rectangle([16,MY,260,938],fill=(240,240,232),outline=GRAY,width=1)
 txt(d,22,MY+4,"WHERE IT HAPPENED",F_SM,NAVY)
-# simplified world map
-d.rectangle([30,MY+30,210,MY+196],fill=(224,230,228))
-# continents as blobs
-d.polygon([(44,MY+52),(78,MY+46),(92,MY+66),(76,MY+88),(56,MY+84),(42,MY+70)],fill=(186,200,194))
-d.polygon([(84,MY+94),(106,MY+90),(112,MY+130),(96,MY+150),(86,MY+126)],fill=(186,200,194))
-d.polygon([(110,MY+48),(168,MY+40),(196,MY+62),(180,MY+96),(140,MY+98),(116,MY+76)],fill=(186,200,194))
-d.polygon([(140,MY+104),(182,MY+100),(188,MY+146),(158,MY+162),(142,MY+136)],fill=(186,200,194))
-d.ellipse([192,MY+150,208,MY+166],fill=(186,200,194))
-pts=[(60,60,GLOBAL if False else PURPLE,1),(96,112,BLUE,4),(130,62,GREEN,2),
-     (150,130,ORANGE,8),(170,74,RED,3),(190,118,TEAL,6),(74,150,GOLD,7)]
-for px,py,col,n in pts: badge(d,28+px,MY+18+py,n,col)
-d.line([(206,MY+158),(220,MY+180)],fill=GOLD,width=1)
-txt(d,24,MY+210,"Voyager 1  →  Interstellar space",F_MICRO,(90,96,110))
+# recognisable equirectangular world map
+MX,MY0,MW,MH = 26, MY+28, 224, 158
+d.rectangle([MX,MY0,MX+MW,MY0+MH],fill=(206,226,236))
+def mp(px,py): return (MX+px*1.12, MY0+py*1.58)
+continents=[
+ [(8,12),(30,8),(55,12),(70,18),(65,28),(58,32),(60,40),(50,42),(42,36),(35,30),(22,32),(14,26)],
+ [(58,44),(72,43),(80,50),(76,62),(70,74),(64,82),(60,76),(58,62),(54,52)],
+ [(55,4),(72,5),(74,14),(60,15)],
+ [(94,14),(108,10),(120,14),(122,22),(112,28),(100,28),(94,22)],
+ [(94,30),(118,29),(128,38),(122,52),(112,66),(102,70),(96,58),(90,44)],
+ [(124,12),(150,7),(180,10),(198,18),(190,28),(175,32),(165,40),(150,44),(136,38),(128,28)],
+ [(164,58),(180,56),(186,64),(180,72),(166,70)],
+]
+for poly in continents:
+    d.polygon([mp(px,py) for px,py in poly],fill=(168,188,176))
+# graticule
+for gx in range(50,200,50):
+    a=mp(gx,0); b=mp(gx,100); d.line([a,b],fill=(190,212,222),width=1)
+for gy in range(25,100,25):
+    a=mp(0,gy); b=mp(200,gy); d.line([a,b],fill=(190,212,222),width=1)
+pts=[(59,27,NAVY,1),(131,35,RED,2),(119,33,RED,3),(117,22,BLUE,4),
+     (102,22,BLUE,5),(117,42,ORANGE,6),(147,39,PURPLE,7),(148,19,GRAY,8),
+     (59,48,GREEN,9),(73,59,GREEN,10),(59,27,NAVY,11)]
+for px,py,col,n in pts:
+    x,y=mp(px,py); badge(d,x,y,n,col)
+d.line([mp(196,72),mp(210,88)],fill=GOLD,width=2)
+txt(d,22,MY+192,"1-11 main stories  ·  Voyager 1 →",F_MICRO,(80,86,100))
 
-d.rectangle([232,MY,1008,938],fill=(248,246,238),outline=GRAY,width=1)
-txt(d,238,MY+4,"ALSO ON WEDNESDAY 18 NOVEMBER",F_SM,NAVY)
+d.rectangle([268,MY,1008,938],fill=(248,246,238),outline=GRAY,width=1)
+txt(d,274,MY+4,"ALSO ON WEDNESDAY 18 NOVEMBER",F_SM,NAVY)
 cols=4; per=7
-cw=(776-16)//4
+cw=(740-16)//4
 for k,(n,reg,head) in enumerate(TINY):
     c=k//per; r=k%per
     if c>=cols: break
-    x=240+c*cw; y=MY+22+r*30
+    x=276+c*cw; y=MY+22+r*30
     badge(d,x,y,n,REGCOL[reg])
     for li,ln in enumerate(wrap(head,F_TINY,cw-18,d)[:2]):
         txt(d,x+18,y+li*10,ln,F_TINY,(48,54,68))
